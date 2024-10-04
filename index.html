@@ -42,7 +42,7 @@
     console.log("Hello World!")
   </script> -->
 
-  <!-- <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     function createUniversalLink() {
     }
@@ -75,12 +75,27 @@
     }
 
     function getEnvironment() {
+      document.getElementById("os").append(liff.getOS()) // แสดง value = ios or web or android
+      document.getElementById("language").append(liff.getLanguage()) // แสดง default language of client is ?
+      document.getElementById("version").append(liff.getVersion()) // แสดง version liff
+      document.getElementById("accessToken").append(liff.getAccessToken()) //
+      document.getElementById("isInClient").append(liff.isInClient()) // แสดง liff ที่ client เปิดนั้น เปิดจาก app line or external browser || return true or false
+      
+      // เปิดใน line app ให้ปิดปุ่ม logout
+      if (liff.isInClient()) {
+        document.getElementById("btnLogOut").style.display = "none"
+      } else {
+        // เปิดใน external browser ใหซ่อนปุ่ม send msg, scan, close
+        document.getElementById("btnMsg").style.display = "none"
+        document.getElementById("btnScanCode").style.display = "none"
+        document.getElementById("btnClose").style.display = "none"
+      }
     }
 
     async function main() {
-      alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "YOUR-LIFF-ID" })
-      // getEnvironment()
+      // alert("LINE Developers x Skooldio")
+      await liff.init({ liffId: "2006421356-2jOaqE97" })
+      getEnvironment()
       // getUserProfile()
       // getContext()
       // getFriendship()
