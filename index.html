@@ -78,15 +78,19 @@
         await liff.sendMessages([
           // ส่งได้ 5 bubble
           {
-            "type": "sticker",
-            "stickerId": 1,
-            "packageId": 1
+            type: "sticker",
+            stickerId: "1",
+            packageId: "1",
           },
           {
-            "type": "sticker",
-            "packageId": "446",
-            "stickerId": "1988"
-          }
+            type: "sticker",
+            packageId: "446",
+            stickerId: "1988",
+          },
+          {
+            type: "text",
+            text: "Hello, World!",
+          },
         ])
         alert("Message sent")
       }
