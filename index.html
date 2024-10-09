@@ -75,19 +75,37 @@
 
     async function sendMsg() {
       if (liff.getContext().type !== "none") {
+        // await liff.sendMessages([
+        //   // ส่งได้ 5 bubble
+        //   {
+        //     "type": "sticker",
+        //     "packageId": "446",
+        //     "stickerId": "1988"
+        //   },
+        //   {
+        //     type: "text",
+        //     text: "Hello, World!",
+        //   },
+        // ])
+        // alert("Message sent")
         await liff.sendMessages([
-          // ส่งได้ 5 bubble
+          {
+            type: "text",
+            text: "Hello, World!",
+          },
           {
             "type": "sticker",
             "packageId": "446",
             "stickerId": "1988"
           },
-          {
-            type: "text",
-            text: "Hello, World!",
-          },
         ])
-        alert("Message sent")
+        .then(() => {
+          console.log("message sent");
+          alert("Message sent")
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
       }
     }
 
