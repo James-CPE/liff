@@ -76,10 +76,16 @@
     async function sendMsg() {
       if (liff.getContext().type !== "none") {
         await liff.sendMessages([
+          // ส่งได้ 5 bubble
           {
             "type": "sticker",
             "stickerId": 1,
             "packageId": 1
+          },
+          {
+            "type": "sticker",
+            "packageId": "446",
+            "stickerId": "1988"
           }
         ])
         alert("Message sent")
