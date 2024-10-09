@@ -23,11 +23,13 @@
   <!-- Email -->
   <p id="decodedIDToken"><b>email:</b> </p>
 
+  <!-- Get context -->
   <p id="type"><b>type:</b> </p>
   <p id="viewType"><b>viewType:</b> </p>
   <p id="utouId"><b>utouId:</b> </p>
   <p id="roomId"><b>roomId:</b> </p>
   <p id="groupId"><b>groupId:</b> </p>
+
   <p id="friendship"><b>isFriendship:</b> </p>
   <p id="scanCode"><b>Code:</b> </p>
   <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
@@ -75,6 +77,11 @@
     }
 
     function getContext() {
+      document.getElementById("type").append(liff.getContext().type) // return ค่าการสนทนาของ user แบบใด | แบบ one on one, group, room ถ้าไม่ใช่ 3 อย่างนี้จะได้ค่า none เพราะว่าเปิดจาก external browser
+      document.getElementById("viewType").append(liff.getContext().viewType) // ค่าที่ได้เป็น viewType แบบได้ มี 3 แบบคือ compact, tall, full
+      document.getElementById("utouId").append(liff.getContext().utouId) // จะได้ค่าอย่างหนึงที่มาจากแชตรูปแบบ one on one ถ้าเป็นรูปแบบอื่นจะไม่แสดง
+      document.getElementById("roomId").append(liff.getContext().roomId) // ค่า room Id ของห้องแชต liff
+      document.getElementById("groupId").append(liff.getContext().groupId) // จะได้ค่า group Id
     }
 
     async function getUserProfile() {
@@ -83,7 +90,7 @@
       document.getElementById("userId").append(profile.userId)
       document.getElementById("statusMessage").append(profile.statusMessage)
       document.getElementById("displayName").append(profile.displayName)
-      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email) // get email
     }
 
     function getEnvironment() {
@@ -91,7 +98,7 @@
       document.getElementById("language").append(liff.getLanguage()) // แสดง default language of client is ?
       document.getElementById("version").append(liff.getVersion()) // แสดง version liff
       document.getElementById("accessToken").append(liff.getAccessToken()) //
-      document.getElementById("isInClient").append(liff.isInClient()) // แสดง liff ที่ client เปิดนั้น เปิดจาก app line or external browser || return true or false || line app = true, browser = false
+      document.getElementById("isInClient").append(liff.isInClient()) // แสดง liff ที่ client เปิดนั้นเปิดจาก app line or external browser || return true or false || line app = true, browser = false
       
       // เปิดใน line app ให้ปิดปุ่ม logout
       if (liff.isInClient()) {
@@ -109,7 +116,7 @@
       await liff.init({ liffId: "2006421356-2jOaqE97" })
       getEnvironment()
       getUserProfile()
-      // getContext()
+      getContext()
       // getFriendship()
       // createUniversalLink()
     }
