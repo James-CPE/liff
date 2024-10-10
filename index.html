@@ -67,6 +67,8 @@
     }
 
     async function scanCode() {
+      const result = await liff.scanCode()
+      document.getElementById("scanCode").append(result.value)
     }
 
     function openWindow() {
@@ -91,11 +93,6 @@
       if (liff.getContext().type !== "none") {
         await liff.sendMessages([
           // ส่งได้ 5 bubble
-          {
-            "type": "sticker",
-            "packageId": "446",
-            "stickerId": "1988"
-          },
           {
             type: "text",
             text: "Hello, World!",
