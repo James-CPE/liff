@@ -30,7 +30,9 @@
   <p id="roomId"><b>roomId:</b> </p>
   <p id="groupId"><b>groupId:</b> </p>
 
+  <!-- Get friendship -->
   <p id="friendship"><b>isFriendship:</b> </p>
+
   <p id="scanCode"><b>Code:</b> </p>
   <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
   <p id="universalLink1"><b>Universal Link:</b> </p>
@@ -68,44 +70,38 @@
     }
 
     function openWindow() {
+      liff.openWindow({
+        url: "https://line.me",
+        external: true
+      })
     }
 
     async function getFriendship() {
+      const friend = await liff.getFriendship() // return boolean
+      document.getElementById("friendship").append(friend.firendFlag)
+      if (!friend.firendFlag) {
+        if (confirm("คุณยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?")) {
+          // window.location = "https://line"
+          alert("ยังไม่ได้เป็นเพื่อนกับ Bot")
+        }
+      }
     }
 
     async function sendMsg() {
       if (liff.getContext().type !== "none") {
-        // await liff.sendMessages([
-        //   // ส่งได้ 5 bubble
-        //   {
-        //     "type": "sticker",
-        //     "packageId": "446",
-        //     "stickerId": "1988"
-        //   },
-        //   {
-        //     type: "text",
-        //     text: "Hello, World!",
-        //   },
-        // ])
-        // alert("Message sent")
         await liff.sendMessages([
-          {
-            type: "text",
-            text: "Hello, World!",
-          },
+          // ส่งได้ 5 bubble
           {
             "type": "sticker",
             "packageId": "446",
             "stickerId": "1988"
           },
+          {
+            type: "text",
+            text: "Hello, World!",
+          },
         ])
-        .then(() => {
-          console.log("message sent");
-          alert("Message sent")
-        })
-        .catch((err) => {
-          console.log("error", err);
-        });
+        alert("Message sent")
       }
     }
 
@@ -150,7 +146,7 @@
       getEnvironment()
       getUserProfile()
       getContext()
-      // getFriendship()
+      getFriendship()
       // createUniversalLink()
     }
     main()
