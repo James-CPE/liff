@@ -60,8 +60,9 @@
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
   <script>
     function createUniversalLink() {
-      const link1 = liff.permanentLink.createUrl()
-      document.getElementById("universalLink1").append(link1) + "/liff/"
+      // const link1 = liff.permanentLink.createUrl()
+      const link1 = `${liff.permanentLink.createUrl()}/liff/`
+      document.getElementById("universalLink1").append(link1)
 
       liff.permanentLink.setExtraQueryParam('param=8&id=9')
       const link2 = liff.permanentLink.createUrl()
