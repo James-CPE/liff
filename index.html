@@ -36,7 +36,9 @@
   <!-- Get result Scan Code -->
   <p id="scanCode"><b>Code:</b> </p>
 
+  <!-- Show login status -->
   <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
+
   <p id="universalLink1"><b>Universal Link:</b> </p>
   <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
   <p><a href="liff/path/?param=9">Link to Path</a></p>
@@ -60,6 +62,13 @@
     }
 
     async function shareMsg() {
+      await liff.shareTargetPicker([
+        // สูงสุด 5 bubble
+        {
+          "type": "text",
+          "text": "This message was sent by ShareTargetPicker"
+        }
+      ])
     }
 
     function logOut() {
